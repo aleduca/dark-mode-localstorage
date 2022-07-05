@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h2>Dark Mode</h2>
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex ipsum voluptates adipisci eius, ipsa doloribus, laboriosam nobis qui earum recusandae id eos aspernatur enim doloremque nostrum, error atque molestias inventore?</p>
+
+    <button id="toggle-mode">Change background</button>
+
+    <script>
+
+        window.onload = function(){
+
+            const btn_change_background = document.querySelector('#toggle-mode');
+
+            function loadDarkMode(){
+
+                const isDark = localStorage.getItem('dark');
+                if(isDark){
+                    toggleBackground('white','dark');
+                }
+            }
+
+            loadDarkMode();
+
+            function toggleBackground(oldBackground, newBackground){
+                const body = document.body;
+
+                body.classList.remove(oldBackground);
+                btn_change_background.textContent = 'Change back to '+oldBackground;
+                localStorage.removeItem(oldBackground);
+                body.classList.add(newBackground);
+                localStorage.setItem(newBackground, true);
+            }
+
+
+
+            btn_change_background.addEventListener('click', event => {
+                event.preventDefault();
+
+                const isDark = localStorage.getItem('dark');
+                
+                (isDark)?
+                    toggleBackground('dark','white'):
+                    toggleBackground('white','dark')
+
+            });
+
+
+        }
+
+    </script>
+
+</body>
+</html>
